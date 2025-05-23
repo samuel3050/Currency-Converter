@@ -5,10 +5,35 @@ class Currency:
     def __init__(self, root):
         self.root = root
         self.root.title("Meine Tkinter GUI")
+        self.language = "de"
+        self.texts = {
+            "de": {
+                "title": "Währungsrechner",
+                "start_currency": "Startwährung",
+                "target_currency": "Zielwährung",
+                "amount_label": "Gib deinen Betrag ein:",
+                "convert_button": "Umrechnen",
+                "result_label": "",
+                "to": "zu"
+            },
+            "en": {
+                "title": "Currency Converter",
+                "start_currency": "Start Currency",
+                "target_currency": "Target Currency",
+                "amount_label": "Enter your amount:",
+                "convert_button": "Convert",
+                "result_label": "",
+                "to": "to"
+            }
+        }
 
     def show(self): 
+        # Button für Sprachenwechsel
+        self.button = tk.Button(self.root, text="Sprache wechseln", command=self.switch_language)
+        self.button.pack(pady=10)
+
         # Startwährung
-        self.opt1 = StringVar(value="Startwährung")
+        self.opt1 = StringVar(value=self.texts[self.language]["start_currency"])
 
         # Dropdown-Optionen
         self.currencys = ["Yen", "Euro", "Dollar", "Schwedische Krone"]
@@ -18,11 +43,11 @@ class Currency:
         self.option_menu1.pack()
 
         # Label
-        self.lbl = Label(self.root, text="Zu")
+        self.lbl = Label(self.root, text=self.texts[self.language]["to"])
         self.lbl.pack()
 
         # Zielwährung
-        self.opt2 = StringVar(value="Zielwährung")
+        self.opt2 = StringVar(value=self.texts[self.language]["target_currency"])
 
         # Dropdown-Optionen
         self.currencys = ["Yen", "Euro", "Dollar", "Schwedische Krone"]
@@ -32,7 +57,7 @@ class Currency:
         self.option_menu2.pack()
 
         # Label
-        self.label = tk.Label(self.root, text="Gib deinen Betrag ein:")
+        self.label = tk.Label(self.root, text=self.texts[self.language]["amount_label"])
         self.label.pack(pady=10)
 
         # Entry-Feld
@@ -40,11 +65,11 @@ class Currency:
         self.entry.pack(pady=5)
 
         # Button
-        self.button = tk.Button(self.root, text="Umrechnen", command=self.umrechnen)
+        self.button = tk.Button(self.root, text=self.texts[self.language]["convert_button"], command=self.umrechnen)
         self.button.pack(pady=10)
 
         # Label für Ausgabe
-        self.output_label = tk.Label(self.root, text="")
+        self.output_label = tk.Label(self.root, text=self.texts[self.language]["result_label"])
         self.output_label.pack(pady=10)
 
     def umrechnen(self):
@@ -78,6 +103,13 @@ class Currency:
             ergebnis = betrag * kurse.get((startwährung, zielwährung), 1)
 
         self.output_label.config(text=f"{betrag:.2f} {startwährung} = {ergebnis:.2f} {zielwährung}")
+
+    def switch_language(self, language=None):
+        self.language = "en" if self.language == "de" else "de"
+        for widget in self.root.winfo_children():
+            widget.destroy()
+        self.show()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
