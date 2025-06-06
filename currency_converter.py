@@ -36,7 +36,7 @@ class Currency:
         self.opt1 = StringVar(value=self.texts[self.language]["start_currency"])
 
         # Dropdown-Optionen
-        self.currencys = ["Yen", "Euro", "Dollar", "Schwedische Krone"]
+        self.currencys = ["Yen", "Euro", "Dollar", "Schwedische Krone","Bitcoin"]
 
         # Dropdown-Menü-1
         self.option_menu1 = OptionMenu(self.root, self.opt1, *self.currencys)
@@ -50,7 +50,7 @@ class Currency:
         self.opt2 = StringVar(value=self.texts[self.language]["target_currency"])
 
         # Dropdown-Optionen
-        self.currencys = ["Yen", "Euro", "Dollar", "Schwedische Krone"]
+        self.currencys = ["Yen", "Euro", "Dollar", "Schwedische Krone","Bitcoin"]
 
         # Dropdown-Menü-2
         self.option_menu2 = OptionMenu(self.root, self.opt2, *self.currencys)
@@ -87,14 +87,26 @@ class Currency:
             ("Euro", "Schwedische Krone"): 10.84,
             ("Schwedische Krone", "Euro"): 0.0922,
 
+            ("Euro", "Bitcoin"): 0.000011,
+            ("Bitcoin", "Euro"): 90407.68,
+
             ("Dollar", "Yen"): 141.6195,
             ("Yen", "Dollar"): 0.0071,
 
             ("Dollar", "Schwedische Krone"): 9.5841,
             ("Schwedische Krone", "Dollar"): 0.1044,
 
+            ("Dollar", "Bitcoin"): 0.0000097,
+            ("Bitcoin", "Dollar"): 103498.80,
+
             ("Yen", "Schwedische Krone"): 0.0675,
             ("Schwedische Krone", "Yen"): 14.8068,
+
+            ("Yen", "Bitcoin"): 10.84,
+            ("Bitcoin", "Yen"): 0.0922,
+
+            ("Bitcoin", "Schwedische Krone"): 972054.57,
+            ("Schwedische Krone", "Bitcoin"): 0.0000010,
         }
         
         if startwährung == zielwährung:
